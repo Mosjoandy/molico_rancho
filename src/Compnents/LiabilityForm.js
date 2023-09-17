@@ -2,6 +2,7 @@ import React from 'react';
 import "./LiabilityForm.css";
 import firebase from "../firebase.js";
 import { Container, Row, Col, Card } from "react-bootstrap";
+import ActualForm from './ActualForm';
 
 class LiabilityForm extends React.Component {
     constructor(props) {
@@ -24,13 +25,13 @@ class LiabilityForm extends React.Component {
                                 this.state.rightsRelinquished === false ?
                                     <Card.Body>
                                         <Card.Text>
-                                        FALSE - Form goes here
+                                            <ActualForm />
                                         </Card.Text>
                                     </Card.Body>
                                     :
                                     <Card.Body>
                                         <Card.Text>
-                                        True - Form goes here
+                                        Thank you for signing your life away
                                         </Card.Text>
                                     </Card.Body>
                             }
