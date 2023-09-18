@@ -10,7 +10,7 @@ function ActualForm() {
                     <Card>
                         <Form>
                             <p>
-                                I, _________________________ [please print name of “HARVESTER”] understand that Elvira Coronado Molina,
+                                I, _____________________ [please print name of “HARVESTER”] understand that Elvira Coronado Molina,
                                 also known as “OWNER,” has offered to allow me to enter onto their property to harvest or retrieve fruit
                                 with the purpose of purchasing the harvested fruit. In exchange for this privilege, I agree to:
                             </p>
@@ -37,24 +37,24 @@ function ActualForm() {
                                     both to protect myself and to protect the property of Owner. I will not enter any part of Owner’s home or
                                     yard unless and until I am authorized by Owner to do so. I will walk carefully in Owner’s yard, and will
                                     not climb Owner’s trees or fence in order to retrieve fruit. I will not share the name, address, or any
-                                    other private information of the Owner with others. To avoid waste, I will pick only fruit that appears
-                                    mature and ready to be picked and will leave less mature fruit on the tree.</li><br />
+                                    other private information of the Owner with others. I will pick only fruit that appears
+                                    ready to be harvested.</li><br />
 
-                                <li>Agreement Regarding Use of Ladders: [Please initial one.]
+                                {/* <li>Agreement Regarding Use of Ladders: [Please initial one.]
                                     ______ I will not use a ladder to pick fruit that is beyond my reach.
                                     ______ I have been given permission by the Owner to use a ladder to harvest fruit. I will use great care
                                     and caution when using a ladder. I will inspect any ladder before I use it. If I have any doubt or question
                                     about the safety or stability of a ladder, I will not use it. I expressly assume all risk of injury or death,
                                     however caused, arising out of the use of a ladder, including but not limited to, injury or death from
                                     tipping or falling, caused by a condition of the ladder, caused by how or where the ladder is positioned
-                                    or placed, either by myself or others, or caused by act or conduct of mine while using the ladder.</li><br />
+                                    or placed, either by myself or others, or caused by act or conduct of mine while using the ladder.</li><br /> */}
 
                                 <li>Additional Guidelines: I agree to abide by the following additional guidelines when I enter onto
                                     Owner’s property:</li><br />
 
                                 <ol type="a">
                                     <li>I will respect property boundary lines and be careful not to enter neighboring
-                                        orchards/farms/properties. I will not pick fruit from trees outside of Owner’s property.</li><br />
+                                        orchards/farms/properties. I will not pick fruit from undesignated trees.</li><br />
                                 </ol>
 
                                 <li>Agreement to Release Owner from Liability: In exchange for receiving Owner’s permission to enter
