@@ -24,7 +24,7 @@ export function Canvas(props) {
   function stop() {
     setIsDrawing(false);
     prevX = prevY = null;
-    props.signature({...props.formData, formSignature: canvasRef.current.toDataURL()})
+    props.signature({ ...props.formData, formSignature: canvasRef.current.toDataURL() })
   }
 
   function draw(e) {
@@ -59,6 +59,9 @@ export function Canvas(props) {
       onMouseMove={draw}
       onMouseUp={stop}
       onMouseLeave={stop}
+      onTouchStart={start}
+      onTouchMove={draw}
+      onTouchEnd={stop}
       width="500px"
       height="100px"
     />
