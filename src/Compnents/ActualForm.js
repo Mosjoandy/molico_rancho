@@ -1,16 +1,132 @@
-import React from 'react';
+import React, {useState, useEffect, useRef} from 'react';
+import "./ActualForm.css";
+import Canvas from './Canvas';
 import firebase from "../firebase.js";
-import { Container, Row, Col, Card, Form } from "react-bootstrap";
+import { Container, Row, Col, Card, Form , Button, Modal} from "react-bootstrap";
+
+function MyVerticallyCenteredModal(props) {
+    // const [isDrawing, setIsDrawing] = useState(false);
+    // const [cords, setCords] = useState({clientX:'',clientY:''})
+    // var canvas 
+    // var ctx 
+    // var prevX, prevY;
+    // var currX, currY;
+    // var signature = document.getElementsByName('signature')[0];
+    // var rect
+    // var xoff
+    // var yoff
+    // var signatureURL
+
+
+    //   function canvasLoader() {
+    //     canvas = document.getElementById('signature');
+    //     ctx = canvas.getContext("2d");
+    //     rect = canvas.getBoundingClientRect();
+    //     xoff = rect.left;
+    //     yoff = rect.top;
+    //   }
+    
+    //   function start(e) {
+    //     setIsDrawing(true);
+    //     console.log("starting")
+    //   }
+      
+    //   function stop() {
+    //     setIsDrawing(false);
+    //     prevX = prevY = null;
+    //     if(typeof canvas === 'undefined'){
+    //         canvas = document.getElementById('signature');
+    //     }
+    //     signatureURL = canvas.toDataURL();
+    //     console.log(signatureURL)
+    //   }
+      
+    //   function draw(clientX,clientY) {
+    //     if (!isDrawing) {
+    //         console.log("not doing anything.")
+    //       return;
+    //     }
+    //     console.log(clientX,clientY)
+    //     // Test for touchmove event, this requires another property.
+    //     currX = clientX - xoff;
+    //     currY = clientY - yoff;
+    //     if (!prevX && !prevY) {
+    //       prevX = currX;
+    //       prevY = currY;
+    //     }
+        
+    //    // console.log(document.getElementById('signature'))
+    //     if(typeof ctx === 'undefined'){
+    //         canvas = document.getElementById('signature');
+    //         ctx = canvas.getContext("2d");
+    //     }
+    //     ctx.beginPath();
+    //     ctx.moveTo(prevX, prevY);
+    //     ctx.lineTo(currX, currY);
+    //     ctx.strokeStyle = 'black';
+    //     ctx.lineWidth = 2;
+    //     ctx.stroke();
+    //     ctx.closePath();
+      
+    //     prevX = currX;
+    //     prevY = currY;
+
+
+        
+    //   }
+    //   useEffect(()=>{
+    //        draw(cords.clientX,cords.clientY) 
+    //   },[isDrawing,cords])
+ 
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Draw your signature.
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <div>
+        <Canvas formData={props.formData} signature={props.signature} width={'100%'} height={'100px'} className="signature"/>
+        </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+
 
 function ActualForm() {
+    const date = new Date(); 
+    const [formData, setFormData] = useState({formNameCertify: '',formName: '',formDate: `${String(date.getFullYear())}-${String(date.getMonth()+1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`,formSignature: ''})
+    const [modalShow, setModalShow] = useState(false);
+    const handleFormChange = async (field,e) =>{
+        setFormData({...formData, [field]: e.target.value})
+    }
+
+    const handleFormSubmit = async ()=>{
+        console.log(formData);
+    }
+    const styles = {
+        display: modalShow ? '' : 'none'
+    }
     return (
         <Container>
+
+            <MyVerticallyCenteredModal formData={formData} signature={setFormData} show={modalShow} style={styles} onHide={() => setModalShow(false)}/>
             <Row>
                 <Col>
                     <Card>
                         <Form>
                             <p>
-                                I, _____________________ [please print name of “HARVESTER”] understand that Elvira Coronado Molina,
+                                I, <Form.Control className="form-input" size="sm" type="text" placeholder="Your Name"  id="formName" onChange={(e)=>handleFormChange("formName",e)}/> [please print name of “HARVESTER”] understand that Elvira Coronado Molina,
                                 also known as “OWNER,” has offered to allow me to enter onto their property to harvest or retrieve fruit
                                 with the purpose of purchasing the harvested fruit. In exchange for this privilege, I agree to:
                             </p>
@@ -82,11 +198,22 @@ function ActualForm() {
                                 I have carefully read this Agreement and fully understand it. I am aware that this is a legally binding
                                 release of liability and a contract between Owner, and myself and I sign it of my own free will.
                             </ol>
-
-                            Harvester Signature: _____________________________ Date: _____________________
-
-                            Print Name: ____________________________________
-
+                            <div className="form-bottom">
+                            <div>
+                            Print Name: <Form.Control className="form-input" size="sm" type="text" placeholder="Print Name" id="formNameCertify" onChange={(e)=>handleFormChange("formNameCertify",e)}/> 
+                            </div>
+                            <div>
+                             Date: <input type="date" id="chooseDate" name="trip-start" 
+                            value={`${String(date.getFullYear())}-${String(date.getMonth()+1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`} min="2022-01-01" max="2026-12-31" onChange={(e)=>handleFormChange("formDate",e)}/>
+                            </div>
+                            <br></br>
+                            <div>
+                             Harvester Signature: <Form.Control className="form-input" size="sm" type="text" value={formData.formSignature} placeholder="Signature" id="formSignature" onClick={() => setModalShow(true)} /> 
+                            </div>
+                            </div>
+                            
+                            <Button onClick={()=>handleFormSubmit()} disabled={formData.formName === "" || formData.formNameCertify === "" ||  formData.formSignature === "" || formData.formName !== formData.formNameCertify  ? true : false} >Submit</Button>      
+                            
                         </Form>
                     </Card></Col>
             </Row>
@@ -95,3 +222,7 @@ function ActualForm() {
 };
 
 export default ActualForm
+
+
+
+//onChange={(e)=>handleFormChange("formSignature",e)}

@@ -1,0 +1,27 @@
+.form-input, input{
+    border: none;
+    border-bottom: solid black 1px;
+    width: 150px;
+    display: inline-block;
+    text-align: center;
+}
+
+.form-bottom{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+.signature {
+    border: 2px solid black;
+  }
+  
+  form>* {
+    margin: 10px;
+  }
+  canvas {
+    width: 500px;
+    height: 100px;
+  }
+  
